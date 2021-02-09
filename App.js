@@ -1,6 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
+
+import productsReducer from './store/reducers/products';
+
+const rootReducer = combineReducers({
+
+});
 
 export default function App() {
   return (
