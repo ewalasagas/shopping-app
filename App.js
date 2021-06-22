@@ -7,15 +7,18 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import productsReducer from './store/reducers/products';
 import cartReducer from './store/reducers/cart';
-import {ProductsNavigator} from './navigation/ShopNavigator';
+import orderReducer from './store/reducers/orders';
+import {ProductsNavigator, OrdersNavigation} from './navigation/ShopNavigator';
+import DrawerNavigator from './navigation/DrawerNavigator';
 
 import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
-import { composeWithDevTools} from 'redux-devtools-extension';
+// import { composeWithDevTools} from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
   products: productsReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  orders: orderReducer,
 });
 
 const store = createStore(rootReducer);
@@ -44,7 +47,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <ProductsNavigator />
+        <DrawerNavigator />
       </NavigationContainer>
     </Provider>
     
