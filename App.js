@@ -6,13 +6,16 @@ import {Provider} from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 
 import productsReducer from './store/reducers/products';
+import cartReducer from './store/reducers/cart';
 import {ProductsNavigator} from './navigation/ShopNavigator';
 
 import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
+import { composeWithDevTools} from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
-  products: productsReducer
+  products: productsReducer,
+  cart: cartReducer
 });
 
 const store = createStore(rootReducer);

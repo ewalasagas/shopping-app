@@ -5,7 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
+import CartScreen from '../screens/shop/CartScreen';
 import Colors from '../constants/Colors';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import HeaderButton from '../components/UI/HeaderButton';
 
 const Stack = createStackNavigator();
 
@@ -15,8 +18,15 @@ const ProductsNavigator = () => {
             <Stack.Screen 
                 name="ProductsOverviewScreen"
                 component={ProductsOverviewScreen}
-                options={{
+                options={({navigation, route}) => ({
                     headerTitle: 'All Products',
+                    headerRight: () => (
+                        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                            <Item title='Cart' iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                            onPress={() => {
+                                navigation.navigate('CartScreen')
+                            }}/>
+                        </HeaderButtons>),
                     headerStyles: {
                         backgroundColor: Platform.OS === 'android' ? Colors.primary : '',
                     },
@@ -27,13 +37,20 @@ const ProductsNavigator = () => {
                     headerBackTitle: {
                         fontFamily: 'open-sans'
                     }
-                }}
+                })}
             />
             <Stack.Screen 
                 name="ProductDetailScreen"
                 component={ProductDetailScreen}
                 options={({route}) => ({
                     title: route.params.productTitle
+                })}
+            />
+            <Stack.Screen 
+                name="CartScreen"
+                component={CartScreen}
+                options={({route}) => ({
+                    title: 'Cart'
                 })}
             />
         </Stack.Navigator>
